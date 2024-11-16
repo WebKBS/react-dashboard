@@ -4,3 +4,5 @@
 - React
 - Vite
 - TypeScript
+- tailwindcss
+- shadcn ui
