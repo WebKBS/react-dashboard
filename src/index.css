@@ -113,7 +113,14 @@
   * {
     @apply border-border;
   }
+  html{
+    @apply w-full min-h-full;
+  }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground min-h-full;
+  }
+  #root {
+    @apply w-full min-h-full;
   }
 }
+
