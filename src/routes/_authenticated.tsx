@@ -23,10 +23,17 @@ function AuthenticatedLayout() {
   return (
     <>
       {/* option = {defaultOpen: boolean} {open: boolean} {onOpenChange: (open: boolean) => void} */}
-      <SidebarProvider defaultOpen={true}>
+      <SidebarProvider defaultOpen={true} className="flex-1">
         <AppSideBar />
-        <SidebarTrigger />
-        <Outlet />
+        <div className="w-full">
+          <header className="flex items-center gap-2 py-2 px-4">
+            <SidebarTrigger />
+            <div className="flex-1">
+              <p>Header</p>
+            </div>
+          </header>
+          <Outlet />
+        </div>
       </SidebarProvider>
     </>
   );

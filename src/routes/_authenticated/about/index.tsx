@@ -1,9 +1,10 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import Container from "@/components/layout/Container.tsx";
 
-export const Route = createFileRoute('/_authenticated/about/')({
+export const Route = createFileRoute("/_authenticated/about/")({
   component: AboutPage,
-})
+});
 
 function AboutPage() {
-  return 'Hello /about/!'
+  return <Container>About Page</Container>;
 }
