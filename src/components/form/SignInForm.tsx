@@ -36,7 +36,6 @@ const SignInForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { username, password } = values;
-    console.log(username, password);
     await useAuth().signIn(username, password);
 
     navigate({

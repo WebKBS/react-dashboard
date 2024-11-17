@@ -36,7 +36,7 @@ export const useAuth = () => {
       const tokens = tokenStorage.getTokens();
       if (tokens?.refreshToken) {
         // 서버에 로그아웃 알림
-        await api.post("/auth/logout", {
+        await api.post("/auth/signout", {
           refreshToken: tokens.refreshToken,
         });
       }

@@ -7,15 +7,12 @@ export const Route = createFileRoute("/")({
   beforeLoad: async ({ context }) => {
     const { isAuthenticated } = context.authentication;
 
-    console.log(await isAuthenticated());
-
     if (await isAuthenticated()) {
       throw redirect({
         to: "/dashboard",
       });
     }
   },
-
   component: Index,
 });
 
