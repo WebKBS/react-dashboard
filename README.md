@@ -6,3 +6,6 @@
 - TypeScript
 - tailwindcss
 - shadcn ui
+- tanstack-router
+- react-hook-form
+- zod

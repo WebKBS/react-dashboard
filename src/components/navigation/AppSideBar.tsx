@@ -9,6 +9,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { navigate } from "@/contants/navigate.ts";
+import { Link } from "@tanstack/react-router";
 
 const AppSideBar = () => {
   return (
@@ -21,10 +22,10 @@ const AppSideBar = () => {
               {navigate.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                    <Link to={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

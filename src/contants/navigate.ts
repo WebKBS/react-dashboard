@@ -8,8 +8,8 @@ export const navigate = [
     icon: Home,
   },
   {
-    title: "Inbox",
-    url: "#",
+    title: "About",
+    url: "/about",
     icon: Inbox,
   },
   {
