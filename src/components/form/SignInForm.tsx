@@ -12,6 +12,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useNavigate } from "@tanstack/react-router";
+import { useAuth } from "@/hooks/useAuth.ts";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -22,7 +23,7 @@ const formSchema = z.object({
   }),
 });
 
-const SignIn = () => {
+const SignInForm = () => {
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -33,14 +34,14 @@ const SignIn = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    if (values.username === "admin" && values.password === "admin1234") {
-      localStorage.setItem("isAuthenticated", "true");
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const { username, password } = values;
+    console.log(username, password);
+    await useAuth().signIn(username, password);
 
-      navigate({
-        to: "/dashboard",
-      });
-    }
+    navigate({
+      to: "/dashboard",
+    });
   };
 
   return (
@@ -99,4 +100,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignInForm;

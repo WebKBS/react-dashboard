@@ -9,7 +9,7 @@ import AppSideBar from "@/components/navigation/AppSideBar.tsx";
 export const Route = createFileRoute("/_authenticated")({
   beforeLoad: async ({ context }) => {
     const { isAuthenticated } = context.authentication;
-    if (!isAuthenticated()) {
+    if (!(await isAuthenticated())) {
       throw redirect({
         to: "/",
       });
