@@ -8,11 +8,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useNavigate } from "@tanstack/react-router";
 import { useAuth } from "@/hooks/useAuth.ts";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -44,9 +44,9 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h2 className="mb-6 text-2xl font-bold text-center text-gray-800">
           로그인
         </h2>
         <Form {...form}>
@@ -64,7 +64,7 @@ const SignInForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-red-500 text-sm mt-1" />
+                  <FormMessage className="mt-1 text-sm text-red-500" />
                 </FormItem>
               )}
             />
@@ -82,13 +82,20 @@ const SignInForm = () => {
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage className="text-red-500 text-sm mt-1" />
+                  <FormMessage className="mt-1 text-sm text-red-500" />
                 </FormItem>
               )}
             />
+            <Link
+              to="/SignUp"
+              className="flex justify-end text-sm text-gray-500"
+            >
+              회원가입
+            </Link>
+
             <Button
               type="submit"
-              className="w-full py-3 text-white bg-blue-600 hover:bg-blue-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 !mt-8"
+              className="w-full py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               로그인
             </Button>

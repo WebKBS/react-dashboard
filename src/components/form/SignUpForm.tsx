@@ -1,6 +1,6 @@
-import React, { useState } from "react";
 import { api } from "@/service/auth/axios.ts";
 import { useNavigate } from "@tanstack/react-router";
+import React, { useState } from "react";
 
 interface SignupForm {
   username: string;
@@ -9,7 +9,7 @@ interface SignupForm {
   confirmPassword: string;
 }
 
-const SignUpForm: React.FC = () => {
+const SignUpForm = () => {
   const navigate = useNavigate();
 
   const [form, setForm] = useState<SignupForm>({
@@ -83,7 +83,7 @@ const SignUpForm: React.FC = () => {
 
   return (
     <div className="max-w-md mx-auto mt-10">
-      <h1 className="text-2xl font-bold mb-4">회원가입</h1>
+      <h1 className="mb-4 text-2xl font-bold">회원가입</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label htmlFor="name" className="block font-medium">
@@ -98,7 +98,7 @@ const SignUpForm: React.FC = () => {
             className="w-full px-4 py-2 border rounded-md"
           />
           {errors.username && (
-            <p className="text-red-500 text-sm mt-1">{errors.username}</p>
+            <p className="mt-1 text-sm text-red-500">{errors.username}</p>
           )}
         </div>
 
@@ -115,7 +115,7 @@ const SignUpForm: React.FC = () => {
             className="w-full px-4 py-2 border rounded-md"
           />
           {errors.email && (
-            <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+            <p className="mt-1 text-sm text-red-500">{errors.email}</p>
           )}
         </div>
 
@@ -132,7 +132,7 @@ const SignUpForm: React.FC = () => {
             className="w-full px-4 py-2 border rounded-md"
           />
           {errors.password && (
-            <p className="text-red-500 text-sm mt-1">{errors.password}</p>
+            <p className="mt-1 text-sm text-red-500">{errors.password}</p>
           )}
         </div>
 
@@ -149,7 +149,7 @@ const SignUpForm: React.FC = () => {
             className="w-full px-4 py-2 border rounded-md"
           />
           {errors.confirmPassword && (
-            <p className="text-red-500 text-sm mt-1">
+            <p className="mt-1 text-sm text-red-500">
               {errors.confirmPassword}
             </p>
           )}
