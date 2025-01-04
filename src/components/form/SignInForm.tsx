@@ -26,6 +26,7 @@ const formSchema = z.object({
 
 const SignInForm = () => {
   const navigate = useNavigate();
+  const auth = useAuth(); // useAuth를 컴포넌트 외부로 초기화
   const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -36,25 +37,20 @@ const SignInForm = () => {
     },
   });
 
+  // onSubmit 함수 최적화
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { username, password } = values;
     try {
-      await useAuth().signIn(username, password);
+      await auth.signIn(username, password);
+
+      await navigate({
+        to: "/dashboard",
+      });
     } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.error("로그인 실패", error);
-        setError("사용자 이름 또는 비밀번호가 잘못되었습니다.");
-
-        setTimeout(() => {
-          setError(null);
-        }, 3000);
-        return;
-      }
+      console.error("로그인 실패", error);
+      setError("사용자 이름 또는 비밀번호가 잘못되었습니다.");
+      return;
     }
-
-    navigate({
-      to: "/dashboard",
-    });
   };
 
   return (
@@ -64,7 +60,13 @@ const SignInForm = () => {
           로그인
         </h2>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              form.handleSubmit(onSubmit)();
+            }}
+            className="space-y-4"
+          >
             <FormField
               control={form.control}
               name="username"

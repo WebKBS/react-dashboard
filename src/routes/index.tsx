@@ -10,11 +10,10 @@ export const Route = createFileRoute("/")({
       throw redirect({
         to: "/dashboard",
       });
-    }else {
+    } else {
       throw redirect({
         to: "/login",
       });
     }
   },
 });
-
