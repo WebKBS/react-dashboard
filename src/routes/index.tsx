@@ -1,5 +1,4 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
-import SignIn from "@/components/form/SignInForm.tsx";
 
 export const Route = createFileRoute("/")({
   // 사용자가 로그인되어 있으면 대시보드로 리디렉션합니다.
@@ -11,15 +10,11 @@ export const Route = createFileRoute("/")({
       throw redirect({
         to: "/dashboard",
       });
+    }else {
+      throw redirect({
+        to: "/login",
+      });
     }
   },
-  component: Index,
 });
 
-function Index() {
-  return (
-    <div className="w-full h-full">
-      <SignIn />
-    </div>
-  );
-}

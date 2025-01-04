@@ -13,6 +13,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useState } from "react";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -25,6 +26,7 @@ const formSchema = z.object({
 
 const SignInForm = () => {
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,7 +38,19 @@ const SignInForm = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const { username, password } = values;
-    await useAuth().signIn(username, password);
+    try {
+      await useAuth().signIn(username, password);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("로그인 실패", error);
+        setError("사용자 이름 또는 비밀번호가 잘못되었습니다.");
+
+        setTimeout(() => {
+          setError(null);
+        }, 3000);
+        return;
+      }
+    }
 
     navigate({
       to: "/dashboard",
@@ -86,6 +100,7 @@ const SignInForm = () => {
                 </FormItem>
               )}
             />
+            {error && <p className="text-sm text-red-500">{error}</p>}
             <Link
               to="/SignUp"
               className="flex justify-end text-sm text-gray-500"

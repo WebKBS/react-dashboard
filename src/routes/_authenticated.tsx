@@ -13,7 +13,7 @@ export const Route = createFileRoute("/_authenticated")({
     const { isAuthenticated } = context.authentication;
     if (!(await isAuthenticated())) {
       throw redirect({
-        to: "/",
+        to: "/login",
       });
     }
   },

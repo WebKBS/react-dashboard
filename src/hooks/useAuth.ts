@@ -18,14 +18,21 @@ export const useAuth = () => {
     email: string,
     password: string,
   ): Promise<AuthResponse> => {
-    const response = await api.post<AuthResponse>("/auth/signin", {
-      email,
-      password,
-    });
+    let response;
+
+    try {
+      response = await api.post<AuthResponse>("/auth/signin", {
+        email,
+        password,
+      });
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
 
     tokenStorage.setTokens({
-      accessToken: response.data.accessToken,
-      refreshToken: response.data.refreshToken,
+      accessToken: response?.data.accessToken,
+      refreshToken: response?.data.refreshToken,
     });
 
     return response.data;

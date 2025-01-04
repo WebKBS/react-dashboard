@@ -2,7 +2,7 @@ import axios from "axios";
 import { RefreshResponse, tokenStorage } from "@/lib/storage.ts";
 
 export const api = axios.create({
-  baseURL: (import.meta.env.API_URL as string) || "http://localhost:3000",
+  baseURL: (import.meta.env.API_URL as string) || "http://localhost:4000",
   withCredentials: true,
 });
 
